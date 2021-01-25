@@ -1,0 +1,49 @@
+{
+  "name": "vue-fade-scrollbar",
+  "version": "1.0.0",
+  "description": "When you need to show the scrollbar when you hover over a specific area",
+  "main": "./src/components/VueFadeScrollbar.vue",
+  "scripts": {
+    "build-bundle": "vue-cli-service build --dest dist --target lib --name VueFakeScroll ./src/components/VueFakeScroll.vue",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kirillidze/vue-fade-scrollbar.git"
+  },
+  "keywords": [
+    "vue",
+    "scroll",
+    "scrollbar",
+    "component"
+  ],
+  "author": "Kiryl Sushko <kiryoushka@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kirillidze/vue-fade-scrollbar/issues"
+  },
+  "homepage": "https://github.com/kirillidze/vue-fade-scrollbar#readme",
+  "dependencies": {
+    "bourbon": "^7.0.0",
+    "vue": "^2.6.12"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.5.11",
+    "@vue/cli-plugin-eslint": "^4.5.11",
+    "@vue/cli-service": "^4.5.11",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.2",
+    "babel-preset-vue": "^2.0.2",
+    "eslint": "^7.18.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-vue": "^7.5.0",
+    "prettier": "^2.2.1",
+    "sass-export": "^1.0.6",
+    "sass-loader": "^10.1.1",
+    "vue-template-compiler": "^2.6.12"
+  }
+}
