@@ -4,7 +4,7 @@
   "description": "When you need to show the scrollbar when you hover over a specific area",
   "main": "./src/components/VueFadeScrollbar.vue",
   "scripts": {
-    "build-bundle": "vue-cli-service build --dest dist --target lib --name VueFakeScroll ./src/components/VueFakeScroll.vue",
+    "build-bundle": "vue-cli-service build --dest dist --target lib --name VueFadeScrollbar ./src/components/VueFadeScrollbar.vue",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
@@ -45,5 +45,15 @@
     "sass-export": "^1.0.6",
     "sass-loader": "^10.1.1",
     "vue-template-compiler": "^2.6.12"
-  }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }

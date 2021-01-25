@@ -1,0 +1,19 @@
+<meta charset="utf-8">
+<title>VueFadeScrollbar demo</title>
+<script src="https://unpkg.com/vue"></script>
+<script src="./VueFadeScrollbar.umd.js"></script>
+
+<link rel="stylesheet" href="./VueFadeScrollbar.css">
+
+
+<div id="app">
+  <demo></demo>
+</div>
+
+<script>
+new Vue({
+  components: {
+    demo: VueFadeScrollbar
+  }
+}).$mount('#app')
+</script>
