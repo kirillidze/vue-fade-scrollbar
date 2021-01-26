@@ -6,7 +6,7 @@
   "scripts": {
     "build-bundle": "vue-cli-service build --dest dist --target lib --name VueFadeScrollbar ./src/components/VueFadeScrollbar.vue",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --dest docs",
     "lint": "vue-cli-service lint"
   },
   "repository": {
