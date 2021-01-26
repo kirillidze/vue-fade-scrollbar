@@ -21,10 +21,10 @@
   ],
   "author": "Kiryl Sushko <kiryoushka@gmail.com>",
   "license": "MIT",
+  "homepage": "https://kirillidze.github.io/vue-fade-scrollbar/",
   "bugs": {
     "url": "https://github.com/kirillidze/vue-fade-scrollbar/issues"
   },
-  "homepage": "https://github.com/kirillidze/vue-fade-scrollbar#readme",
   "dependencies": {
     "bourbon": "^7.0.0",
     "vue": "^2.6.12"
