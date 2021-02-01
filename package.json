@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "bourbon": "^7.0.0",
+    "sass-loader": "^10.1.1",
     "vue": "^2.6.12"
   },
   "devDependencies": {
@@ -43,7 +44,6 @@
     "eslint-plugin-vue": "^7.5.0",
     "prettier": "^2.2.1",
     "sass-export": "^1.0.6",
-    "sass-loader": "^10.1.1",
     "vue-template-compiler": "^2.6.12"
   },
   "postcss": {

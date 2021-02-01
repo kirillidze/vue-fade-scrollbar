@@ -13,6 +13,7 @@
             <div
                 ref="thumb"
                 class="vue-fade-scrollbar__thumb"
+                :class="thumbClasses"
                 :style="thumbStyles"
                 @mousedown.stop="onFakeScrollBarMouseDown"
             ></div>
@@ -30,6 +31,21 @@ export default {
         visible: {
             type: String,
             default: '',
+        },
+        /**
+         * { thikness, left, right, radius, color, hoverColor, activeColor }
+         */
+        thumb: {
+            type: Object,
+            default: () => {},
+        },
+        thumbClasses: {
+            type: [String, Array, Object],
+            default: '',
+        },
+        trackColor: {
+            type: String,
+            default: 'transparent',
         },
     },
     data() {
@@ -70,8 +86,34 @@ export default {
                 'vue-fade-scrollbar__track--visible': this.hasScroll,
             }
         },
+        computedThumb: {
+            get() {
+                return {
+                    thikness: '10px',
+                    left: '1px',
+                    right: '1px',
+                    radius: 0,
+                    color: '#c7ccd1',
+                    hoverColor: '#8f99a3',
+                    activeColor: '#666666',
+                    ...this.thumb,
+                }
+            },
+            set(val) {
+                this.setThumbProperties(val)
+            },
+        },
+    },
+    watch: {
+        trackColor: {
+            handler(newValue) {
+                this.setTrackColor(newValue)
+            },
+        },
     },
     mounted() {
+        this.setTrackColor(this.trackColor)
+        this.setThumbProperties(this.computedThumb)
         this.scrollEl && this.scrollEl.addEventListener('scroll', this.onFakeScrollBarContentScroll)
 
         this.$nextTick(() => {
@@ -205,15 +247,44 @@ export default {
                 this.scrollEl.scrollTo(0, e.target.scrollHeight * this.scrollRatio)
             }
         },
+        setThumbProperties(val) {
+            if (this.$refs.main) {
+                this.$refs.main.style.setProperty('--thumb-thikness', val.thikness)
+                this.$refs.main.style.setProperty('--thumb-left', val.left)
+                this.$refs.main.style.setProperty('--thumb-right', val.right)
+                this.$refs.main.style.setProperty('--thumb-radius', val.radius)
+                this.$refs.main.style.setProperty('--thumb-main-color', val.color)
+                this.$refs.main.style.setProperty('--thumb-hover-color', val.hoverColor)
+                this.$refs.main.style.setProperty('--thumb-active-color', val.activeColor)
+            }
+        },
+        setTrackColor(val) {
+            if (this.$refs.main) {
+                this.$refs.main.style.setProperty('--track-color', val)
+            }
+        },
     },
 }
 </script>
 
 <style lang="scss">
-@import 'src/styles/media-queries';
-@import 'src/styles/mixins';
+@import '../styles/media-queries';
+@import '../styles/mixins';
 
 .vue-fade-scrollbar {
+    --thumb-thikness: 5px;
+    --thumb-left: 1px;
+    --thumb-right: 1px;
+    --thumb-opacity: 1;
+    --thumb-radius: 8px;
+
+    --thumb-main-color: #c7ccd1;
+    --thumb-hover-color: #8f99a3;
+    --thumb-active-color: #666666;
+    --track-color: 'transparent';
+
+    --track-thikness: calc(var(--thumb-thikness) + var(--thumb-left) + var(--thumb-right));
+
     $block-name: &;
     &__main {
         > * {
@@ -222,41 +293,43 @@ export default {
     }
     position: relative;
     &__track {
-        @include position(absolute, 0 -7px 0 null);
+        @include position(absolute, 0 0 0 null);
         width: 0;
         opacity: 0;
-        background-color: transparent;
+        background-color: var(--track-color);
         z-index: 101;
         display: block;
     }
     &__thumb {
-        @include position(absolute, 0 1px null 1px);
-        background-color: #c7ccd1;
+        @include position(absolute, 0 var(--thumb-right) null var(--thumb-left));
+        background-color: var(--thumb-main-color);
         height: 100px;
-        border-radius: 8px;
-        &:hover,
+        border-radius: var(--thumb-radius);
+        &:hover {
+            background-color: var(--thumb-hover-color);
+        }
         &:active {
-            background-color: #8f99a3;
+            background-color: var(--thumb-active-color);
         }
     }
     &:hover {
         #{$block-name}__track--visible {
-            @include track-visibility();
+            @include track-visibility(var(--track-thikness));
         }
     }
     &__track--visible:active {
-        @include track-visibility();
+        @include track-visibility(var(--track-thikness));
     }
 
     &--visible {
         #{$block-name}__track {
-            @include track-visibility();
+            @include track-visibility(var(--track-thikness));
         }
         @each $name, $value in $token-media-queries {
             &-#{$name} {
                 @media #{$value} {
                     #{$block-name}__track {
-                        @include track-visibility();
+                        @include track-visibility(var(--track-thikness));
                     }
                 }
             }
