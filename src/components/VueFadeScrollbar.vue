@@ -99,9 +99,6 @@ export default {
                     ...this.thumb,
                 }
             },
-            set(val) {
-                this.setThumbProperties(val)
-            },
         },
     },
     watch: {
@@ -109,6 +106,12 @@ export default {
             handler(newValue) {
                 this.setTrackColor(newValue)
             },
+        },
+        thumb: {
+            handler(newValue) {
+                this.setThumbProperties(newValue)
+            },
+            deep: true,
         },
     },
     mounted() {

@@ -1,6 +1,30 @@
 <template>
     <div id="app">
-        <vue-fade-scrollbar :visible="mediaQuery" class="fade-scrollbar">
+        <section class="properties-container">
+            <section class="properties-list">
+                <label v-for="[name] in Object.entries(thumbProperties)" :key="name">
+                    <span>{{ name }}:</span> <br />
+                    <input v-model="thumbProperties[name]" type="text" :name="`thumb-${name}`" />
+                </label>
+            </section>
+            <section class="properties-list">
+                <label>
+                    <span>thumbClasses:</span> <br />
+                    <input v-model="thumbClasses" type="text" name="thumbClasses" />
+                </label>
+                <label>
+                    <span>trackColor:</span> <br />
+                    <input v-model="trackColor" type="text" name="trackColor" />
+                </label>
+            </section>
+        </section>
+        <vue-fade-scrollbar
+            :visible="mediaQuery"
+            :thumb="thumbProperties"
+            :thumb-classes="thumbClasses"
+            :track-color="trackColor"
+            class="fade-scrollbar"
+        >
             <div class="content">
                 <div class="brick"></div>
                 <div class="queries-list">
@@ -10,7 +34,7 @@
                             name="mediaQuery"
                             :value="name"
                             :checked="name === 's-down'"
-                            @input="handleInput"
+                            @input="changeQuery"
                         />
                         {{ name }}: {{ val }}
                     </label>
@@ -44,10 +68,21 @@ export default {
                 'l-down': 'max-width: 1023px',
                 'xl-down': 'max-width: 1439px',
             },
+            thumbProperties: {
+                thikness: '10px',
+                left: '1px',
+                right: '1px',
+                radius: 0,
+                color: '#c7ccd1',
+                hoverColor: '#8f99a3',
+                activeColor: '#666666',
+            },
+            thumbClasses: 'custom-thumb-class',
+            trackColor: 'transparent',
         }
     },
     methods: {
-        handleInput(e) {
+        changeQuery(e) {
             this.mediaQuery = e.target.value
         },
     },
@@ -63,6 +98,7 @@ body,
     width: 100%;
     height: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -75,6 +111,23 @@ body,
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
+}
+
+.properties-container {
+    display: flex;
+    width: 60%;
+}
+
+.properties-container > *:not(:last-child) {
+    margin-right: 20px;
+}
+
+.properties-list {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
 }
 
 .fade-scrollbar {
@@ -99,7 +152,8 @@ body,
     line-height: 28px;
 }
 
-.queries-list > *:not(:last-child) {
+.queries-list,
+.properties-list > *:not(:last-child) {
     margin-bottom: 12px;
 }
 
