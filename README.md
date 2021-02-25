@@ -1,6 +1,6 @@
 # vue-fade-scrollbar
 Wrapper component that replaces the element's own scrollbar. The new scrollbar can auto-hide on various media queries, appear on hover content and doesn't affect the content.
-[See here the Demo](https://alijaya.github.io/vue-fake-scroll/)
+[See here the Demo](https://kirillidze.github.io/vue-fade-scrollbar/)
 
 ## Installation
 
